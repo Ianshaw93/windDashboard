@@ -1,5 +1,5 @@
 # windDashboard
-A wind web app that estimates energy yield for a given location.  The app will be made using Python, Flask and CSS.  
+A wind web app that estimates energy yield for a given location.  The app will be made using Python, Flask and CSS; and data will be sourced using the Openweathermap API.  
 
 This app is in early development.
 
