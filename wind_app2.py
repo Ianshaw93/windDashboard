@@ -2,6 +2,8 @@ import requests
 import configparser
 from flask import Flask, render_template, request
 
+import main
+
 app = Flask(__name__)
 
 
@@ -24,11 +26,14 @@ def render_results():
     wind_direction = data["wind"]["deg"]
     wind_gust = data["wind"]["gust"]
     air_pressure = data["main"]["pressure"]
+    AEP = "{0:.2f}".format(main.AEPdisplay())
+    # AEP = 45000
 
 
     return render_template('results.html',
-                           location=location, wind_direction=wind_direction, wind_speed=wind_speed,
-                           wind_gust=wind_gust, air_pressure=air_pressure) #association between variables parased and html
+                           location=location, wind_direction=wind_direction,
+                           wind_speed=wind_speed, wind_gust=wind_gust,
+                           air_pressure=air_pressure, AEP=AEP) #association between variables parased and html
 def get_api_key():
     config = configparser.ConfigParser()
     config.read('config.ini')
