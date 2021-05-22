@@ -1,28 +1,11 @@
-"""IEA Task 37 Combined Case Study AEP Calculation Code
-Written by Nicholas F. Baker, PJ Stanley, and Jared Thomas (BYU FLOW lab)
-Created 10 June 2018
-Updated 11 Jul 2018 to include read-in of .yaml turb locs and wind freq dist.
-Completed 26 Jul 2018 for commenting and release
-Modified 22 Aug 2018 implementing multiple suggestions from Erik Quaeghebeur:
-    - PEP 8 adherence for blank lines, length(<80 char), var names, docstring.
-    - Altered multiple comments for clarity.
-    - Used print_function for compatibility with Python 3.
-    - Used structured datatype (coordinate) and recarray to couple x,y coords.
-    - Removed unused variable 'sWindRose' (getTurbLocYAML).
-    - Removed unecessary "if ... < 0" case (WindFrame).
-    - Simplified calculations for sin/cos_wind_dir (WindFrame).
-    - Eliminated unecessary calculation of 0 values (GaussianWake, DirPower).
-    - Turbine diameter now drawn from <.yaml> (GaussianWake)
-    - Used yaml.safe_load.
-    - Modified .yaml reading syntax for brevity.
-    - Removed some (now) unused array initializations.
-"""
 from __future__ import print_function   # For Python 3 compatibility
 import numpy as np
 import math
 import sys
 import yaml                             # For reading .yaml files
 from math import radians as DegToRad    # For converting degrees to radians
+
+import wind_app2
 
 
 # Structured datatype for holding coordinate pair
@@ -61,9 +44,14 @@ cut_in_wind_speed = 4
 cut_out_wind_speed = 25
 rated_wind_speed = 9.8
 
+# test turbine direction
+turbine_direction = 0 # I think zero degrees is west
 # test wind data
-wind_speed = [4, 8, 10]
-# wind_dir_deg = [] # leave blank for test - assume all towards turbine i.e. theoretical max
+wind_speed = [8.36, 8.86, 8.73, 8.02, 7.14]
+wind_dir_deg = [89.4, 88.44, 86.01, 83.71, 81.65]
+# # Convert inflow wind direction from degrees
+# wind_dir_rad = DegToRad(wind_dir_deg)
+# wind_speed = [1]
 
 power_produced = []
 turb_pwr = []
@@ -152,6 +140,9 @@ def DirPower(wind_speed, turb_diam, cut_in_wind_speed,
         print(turb_pwr)
     print(turb_pwr_list)
     return turb_pwr_list
+
+# def calcEP(power_produced):
+
 
 def calcAEP(power_produced):
     """Calculate the wind farm AEP."""
@@ -261,16 +252,56 @@ def calcAEP(power_produced):
 
 
 #initialized instance of class or object - auto called when new instance of class created
-if __name__ == "__main__":
-    """Used for demonstration.
-    An example command line syntax to run this file is:
-        python iea37-aepcalc.py iea37-ex16.yaml
-    For Python .yaml capability, in the terminal type "pip install pyyaml".
-    """
+# if __name__ == "__main__":
+#     """Used for demonstration.
+#     An example command line syntax to run this file is:
+#         python iea37-aepcalc.py iea37-ex16.yaml
+#     For Python .yaml capability, in the terminal type "pip install pyyaml".
+#     """
+# add all parameters
+# def AEPdisplay(wind_speed, turb_diam, cut_in_wind_speed,
+#         cut_out_wind_speed, rated_wind_speed, rated_power):
+
+def AEPdisplay():
+    # Test parameters
+    # Default turbine - user will be able to select different ones
+    rated_power = 3350000
+    radius = 65.0
+    rotor_area = 2.0 * math.pi * radius ** 2.0
+    turb_diam = 2 * radius
+    hub_height = 110.0
+    cut_in_wind_speed = 4
+    cut_out_wind_speed = 25
+    rated_wind_speed = 9.8
+
+    # test turbine direction
+    turbine_direction = 0  # I think zero degrees is west
+    # test wind data
+    wind_speed = [8.36, 8.86, 8.73, 8.02, 7.14]
+    wind_dir_deg = [89.4, 88.44, 86.01, 83.71, 81.65]
+
+    # Test parameters
+    # Default turbine - user will be able to select different ones
+    rated_power = 3350000
+    radius = 65.0
+    rotor_area = 2.0 * math.pi * radius ** 2.0
+    turb_diam = 2 * radius
+    hub_height = 110.0
+    cut_in_wind_speed = 4
+    cut_out_wind_speed = 25
+    rated_wind_speed = 9.8
+
+    # test turbine direction
+    turbine_direction = 0  # I think zero degrees is west
+    # test wind data
+    wind_speed = [8.36, 8.86, 8.73, 8.02, 7.14]
+    wind_dir_deg = [89.4, 88.44, 86.01, 83.71, 81.65]
+
     power_produced = DirPower(wind_speed, turb_diam, cut_in_wind_speed,
                               cut_out_wind_speed, rated_wind_speed, rated_power)
     AEP = calcAEP(power_produced)
 
+    return AEP
     # #print('debug')
     # # Read necessary values from .yaml files
     # # Get turbine locations and auxiliary <.yaml> filenames
