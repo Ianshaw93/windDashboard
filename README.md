@@ -22,6 +22,5 @@ Results page showing wind data relevant to the location chosen including annual 
 * The user will be able to upload data to add to the network
 
 
-![image](https://user-images.githubusercontent.com/76686112/123327956-e4e18c80-d532-11eb-92ef-d9a37d11daac.png)
-
+![image](https://user-images.githubusercontent.com/76686112/123328859-055e1680-d534-11eb-920d-91fb386dab4e.png)
 
