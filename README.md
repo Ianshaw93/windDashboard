@@ -20,6 +20,7 @@ Results page showing wind data relevant to the location chosen including annual 
 * The user will be able to select location through an interactive map using Google Earth API, see image below.
 * SQL database will be used to store data
 * The user will be able to upload data to add to the network
+* Other Turbines will be selectable
 
 
 ![image](https://user-images.githubusercontent.com/76686112/123328859-055e1680-d534-11eb-920d-91fb386dab4e.png)
