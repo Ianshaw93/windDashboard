@@ -10,7 +10,7 @@ Google Maps API leveraged with marker for Southwark, London where initial data i
 
 ![image](https://user-images.githubusercontent.com/76686112/123712150-a79a3900-d869-11eb-9aac-26d6b52f4bae.png)
 
-The search bar shown in the image below will be located above the map 
+The search bar shown in the image below will be located above the map (Glasgow used for demo example): 
 
 ![image](https://user-images.githubusercontent.com/76686112/118772183-5b77d400-b87b-11eb-9fa0-9fb4eb48ac2c.png)
 
