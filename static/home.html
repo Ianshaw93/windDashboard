@@ -1,34 +1,60 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Marker Clustering</title>
+    <title>Wind Yield Dashboard</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
+<!--    <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>-->
 
     <!-- jsFiddle will insert style.css and js.js -->
+        <!-- style.css -->
+
+<!--    <link rel="stylesheet" type="text/css" href="./style.css" />-->
+<!--    <script src="./js.js"></script>-->
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    <script>
+        function initMap() {
+          const uluru = { lat: 51.5028, lng: 0.0877 };
+          const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 4,
+            center: uluru,
+          });
+          var test_name = 42;
+          var windS = JSON.parse('{{ windSpeeds | tojson | safe }}');
+          console.log("debugging")
+          console.log(windS);
+          const contentString =
+            `The wind speed is ${test_name}`;
+          const infowindow = new google.maps.InfoWindow({
+            content: contentString,
+          });
+          const marker = new google.maps.Marker({
+            position: uluru,
+            map,
+            title: "Uluru (Ayers Rock)",
+          });
+          marker.addListener("click", () => {
+            infowindow.open({
+              anchor: marker,
+              map,
+              shouldFocus: false,
+            });
+          });
+        }
+    </script>
+<!--    <script src="{{ url_for('static', filename='js.js') }}"></script>-->
+
+
+
   </head>
   <body>
+    <h3>Wind Yield App</h3>
+
     <div id="map"></div>
 
     <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&libraries=&v=weekly"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCub4bXKvVlmdJEpZ_CgGR8J6hxIz43i2A&callback=initMap&libraries=&v=weekly"
       async
     ></script>
   </body>
 </html>
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<h2>Wind Dashbooard</h2>-->
-<!--<form action="{{ url_for('render_results') }}" method="post">-->
-<!--    Location Zip Code/City Name <input type="text" name="zipCode"><br>-->
-<!--    <input type="submit" value="Submit">-->
-<!--</form>-->
-<!--</body>-->
-<!--</html>-->
