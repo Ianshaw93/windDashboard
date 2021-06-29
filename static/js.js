@@ -1,5 +1,5 @@
 var test_name = 42;
-function initMap(test_name=45) {
+function initMap(test_name) {
   const southwark = { lat: 51.5028, lng: 0.0877 };
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 4,
