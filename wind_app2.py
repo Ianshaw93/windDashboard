@@ -9,7 +9,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def weather_dashboard():
-    return render_template('home.html')
+    wS = {
+        'windspeed1': 11,
+        'windspeed2': 12,
+        'windspeed3': 13
+    }
+    return render_template('home.html', windSpeeds=wS)
 
 
 @app.route('/results', methods=['POST'])
